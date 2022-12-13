@@ -1,16 +1,16 @@
-// TO RUN: node server.js
-// TO RUN: nodemon server.js
-
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
+const path = require("path");
 
 app.use("/data", require("./routes/dataRoute"));
 
-app.listen(3001, () => {
-  console.log("Server currently running on port 3001.");
+const PORT = process.env.PORT || 8000;
+
+app.use(express.static(path.join("./frontend/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join("./frontend/build/index.html"));
 });
 
-// Example: Displaying an arraying
-// app.get("/", (req, res, next) => {
-//   res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
-// });
+app.listen(PORT, () => {
+  console.log("Server currently running on port " + PORT);
+});

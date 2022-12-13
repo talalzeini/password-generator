@@ -45,7 +45,7 @@ function App() {
             setRandomNumber(Math.random());
           }}
         >
-          Generate Password
+          Generate
         </button>
       </div>
     </>
